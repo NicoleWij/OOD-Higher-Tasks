@@ -32,11 +32,11 @@ public class View {
         System.out.println("A new sale has started successfully.");
 
         try {
-            contr.enterItem("ServerDownIdentifier");
-            SaleInfoDTO saleInfo = contr.enterItem("ServerDownIdentifier");
-            System.out.println("Added an item with the identifier: ServerDownIdentifier");
+            contr.enterItem("1identifier");
+            SaleInfoDTO saleInfo = contr.enterItem("1identifier");
+            System.out.println("Added an item with the identifier: 1identifier");
             System.out.println("\nItem: " + saleInfo.getCurrentItemName());
-            System.out.println("Item price: " + saleInfo.getCurrentItemPrice() + "\n");
+            System.out.println("Item price: " + saleInfo.getCurrentItemPrice());
 
         } catch (ItemNotFoundException exc) {
             System.err.println("Invalid identifier entered, no item found.");

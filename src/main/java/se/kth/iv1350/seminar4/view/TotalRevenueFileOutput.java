@@ -4,21 +4,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import se.kth.iv1350.seminar4.model.SaleObserver;
-
 /**
  * TotalRevenueFileOutput prints the total income since the program started to a file.
  */
-class TotalRevenueFileOutput implements SaleObserver {
+class TotalRevenueFileOutput extends TotalRevenueDisplay {
     private PrintWriter logFile;
-    private double totalRevenue;
     
     /**
-     * Generates a new isntance of the TotalRevenueFileOutput class
+     * Generates a new instance of the TotalRevenueFileOutput class
      */
     TotalRevenueFileOutput() {
-        totalRevenue = 0;
-
         try {
             logFile = new PrintWriter(new FileWriter("total-revenue.txt"), true);
         } catch (IOException ex) {
@@ -26,10 +21,15 @@ class TotalRevenueFileOutput implements SaleObserver {
             ex.printStackTrace();
         }
     }
-    
+
     @Override
-    public void newSale(double priceOfPurchase){
-        totalRevenue += priceOfPurchase;
+    protected void doShowTotalIncome(double totalRevenue) {
         logFile.println("Total revenue: " + totalRevenue);
+    }
+
+    @Override
+    protected void handleErrors(Exception e) {
+        System.err.println("[FOR DEVELOPER]: Something went wrong when writing to the file\n" + e.getMessage());
+        e.printStackTrace();
     }
 }
