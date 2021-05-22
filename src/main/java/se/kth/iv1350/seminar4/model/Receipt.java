@@ -26,6 +26,27 @@ public class Receipt {
         this.currency = payment.getCurrency();
     }
 
+    /**
+     * @return String
+     */
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("\n\n-- RECEIPT -- \n");
+        string.append("Time of sale: " + this.timeOfSale + "\n");
+
+        string.append("\nBought items:");
+
+        for(Item item : items) {
+            string.append("\n" + item.getName());
+        }
+
+        string.append("\n\nPayment:");
+        string.append("\nAmount paid: " + totalPrice);
+        string.append("\nCurrency: " + currency + "\n");
+
+        return string.toString();
+    }
+
     
     /** 
      * Returns the time of the sale when it starts

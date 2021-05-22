@@ -32,7 +32,7 @@ public abstract class TotalRevenueDisplay implements SaleObserver {
         totalRevenue += priceOfPurchase;
     }
 
-    protected abstract void doShowTotalIncome(double totalRevenue);
+    protected abstract void doShowTotalIncome(double totalRevenue) throws Exception;
 
     protected abstract void handleErrors(Exception e);
 }

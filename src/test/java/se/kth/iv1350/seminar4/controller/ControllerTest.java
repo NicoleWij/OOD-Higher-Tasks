@@ -32,6 +32,8 @@ public class ControllerTest {
         Printer printer = new Printer();
 
         instance = new Controller(eis, eas, printer, dc);
+
+        instance.startSale();
     }
 
     @After
@@ -46,16 +48,29 @@ public class ControllerTest {
     @Test
     public void testUIHasStarted()
     {
-        String printout = printoutBuffer.toString();
+        String printOut = printoutBuffer.toString();
         String expectedOutput = "success";
-        assertTrue("Controller did not start correctly.", printout.contains(expectedOutput));
+        assertTrue("Controller did not start correctly.", printOut.contains(expectedOutput));
+    }
+
+
+    @Test
+    public void enterItemPrintWhenExceptionIsThrown()
+    {
+        try {
+            instance.enterItem("invalid identifier");
+            fail("Exception was not thrown when it should have.");
+
+        } catch (ItemNotFoundException | ServerDownException exc) {
+            String printOut = printoutBuffer.toString();
+            String expectedOutput = "DEVELOPERS";
+            assertTrue("Information for developers did not print.", printOut.contains(expectedOutput));
+        }
     }
 
 
     @Test
     public void testStartSale(){
-        instance.startSale();
-
         String printout = printoutBuffer.toString();
         String expectedOutput = "success";
         assertTrue("StartSale did not start correctly.", printout.contains(expectedOutput));
@@ -64,8 +79,6 @@ public class ControllerTest {
 
     @Test
     public void testEnterItem(){
-
-        instance.startSale();
         ItemDTO item = new ItemDTO("Nice red apple", 0, 0, null, "1identifier");
         try {
             SaleInfoDTO saleInfo = instance.enterItem(item.getIdentifier());
@@ -83,7 +96,6 @@ public class ControllerTest {
     @Test
     public void testPay(){
         double amountPaid = 100;
-        instance.startSale();
         try {
             SaleInfoDTO saleInfo = instance.enterItem("1identifier");
             double price = saleInfo.getRunningTotal();

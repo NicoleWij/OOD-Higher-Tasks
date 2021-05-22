@@ -51,7 +51,7 @@ public class View {
 
         System.out.println("A payment of 100 SEK was made\n");
         double change = contr.pay(amount, currency);
-	    System.out.println("\nChange: " + change + " SEK");
+	    System.out.println("Change: " + change + " SEK");
 
         System.out.println("\n");
     }

@@ -49,7 +49,17 @@ public class ViewTest {
     {
         instanceToTest.runFakeExecution();
         String printout = printoutBuffer.toString();
-        String expectedOutput = "started";
-        assertTrue("UI did not start correctly.", printout.contains(expectedOutput));
+        String expectedOutput = "started:";
+        assertTrue("Fake execution did not start correctly.", printout.contains(expectedOutput));
+    }
+
+
+    @Test
+    public void testEndOfFakeExecution()
+    {
+        instanceToTest.runFakeExecution();
+        String printout = printoutBuffer.toString();
+        String expectedOutput = "Change:";
+        assertTrue("Fake excution did not end correctly.", printout.contains(expectedOutput));
     }
 }

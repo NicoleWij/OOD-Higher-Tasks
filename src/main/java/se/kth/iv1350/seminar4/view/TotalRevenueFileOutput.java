@@ -1,30 +1,34 @@
 package se.kth.iv1350.seminar4.view;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import se.kth.iv1350.seminar4.util.PrintWriterComposition;
+import se.kth.iv1350.seminar4.util.PrintWriterInheritance;
 
 /**
  * TotalRevenueFileOutput prints the total income since the program started to a file.
  */
 class TotalRevenueFileOutput extends TotalRevenueDisplay {
-    private PrintWriter logFile;
+    private PrintWriterComposition logFileComp;
+    private PrintWriterInheritance logFileInherit;
     
     /**
      * Generates a new instance of the TotalRevenueFileOutput class
      */
     TotalRevenueFileOutput() {
         try {
-            logFile = new PrintWriter(new FileWriter("total-revenue.txt"), true);
+            logFileComp = new PrintWriterComposition();
+            logFileInherit = new PrintWriterInheritance();
         } catch (IOException ex) {
-            System.out.println("Could not create logger.");
+            System.out.println("[FOR DEVELOPER]: Could not create logger.");
             ex.printStackTrace();
         }
     }
 
     @Override
-    protected void doShowTotalIncome(double totalRevenue) {
-        logFile.println("Total revenue: " + totalRevenue);
+    protected void doShowTotalIncome(double totalRevenue) throws Exception{
+        logFileComp.println("Total Revenue: " + totalRevenue);
+        logFileInherit.println("Total revenue: " + totalRevenue);
     }
 
     @Override

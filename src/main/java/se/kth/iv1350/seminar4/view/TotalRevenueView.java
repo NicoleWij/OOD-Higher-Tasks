@@ -7,7 +7,7 @@ package se.kth.iv1350.seminar4.view;
 class TotalRevenueView extends TotalRevenueDisplay {
 
     @Override
-    public void doShowTotalIncome(double totalRevenue) {
+    public void doShowTotalIncome(double totalRevenue) throws Exception {
         System.out.println("A message from TotalRevenueObserver: ");
         System.out.println("Total revenue since the program started: " + totalRevenue + "\n");
     }
